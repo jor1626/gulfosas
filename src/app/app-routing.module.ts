@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { NofoundComponent } from './components/nofound/nofound.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/auth', pathMatch: 'full' },
+  { path: '', redirectTo: '/admin', pathMatch: 'full' },
   { path: 'auth', loadChildren: './auth/auth.module#AuthModule' },
   { path: 'admin', loadChildren: './administracion/administracion.module#AdministracionModule' },
   { path: 'recepcion', loadChildren: './recepcion/recepcion.module#RecepcionModule' },
