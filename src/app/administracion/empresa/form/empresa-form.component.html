@@ -1,0 +1,186 @@
+  <form style="zoom:0.80" [formGroup]="formData" (ngSubmit)="!formData.valid || submitEmpresaForm(formData)">
+    <div class="row">
+      <section class="col-lg-10">
+        
+        <div class="row">
+          <div class="col-md-2">
+            <div class="form-group" [ngClass]="{'has-error': (formData.get('codemp').hasError('required') || formData.get('codemp').hasError('maxlength')) && (formData.submited || formData.get('codemp').dirty) }">
+              <label for="codemp">Codigo
+                  <span class="error-control" *ngIf="formData.get('codemp').hasError('required') && (formData.submited || formData.get('codemp').dirty)">es requerido!</span>
+                  <span class="error-control" *ngIf="formData.get('codemp').hasError('maxlength') && (formData.submited || formData.get('codemp').dirty)">max 2 carateres!</span>
+                <span>*</span>
+              </label>
+              <input type="text" class="form-control codigo" formControlName="codemp" [disabled]="true" id="codemp" name="codemp" placeholder="Codigo">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group" [ngClass]="{'has-error': formData.get('nitemp').hasError('required') && (formData.submited || formData.get('nitemp').dirty)}">
+              <label for="nitemp">Nit
+                <span class="error-control" *ngIf="formData.get('nitemp').hasError('required') && (formData.submited || formData.get('nitemp').dirty)">requerido!</span>
+                <span class="error-control" *ngIf="formData.get('nitemp').hasError('maxlength') && (formData.submited || formData.get('nitemp').dirty)">max 15 carateres!</span>
+                <span>*</span>
+              </label>
+              <input type="text" class="form-control codigo" formControlName="nitemp" id="nitemp" placeholder="Nit...">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group" [ngClass]="{'has-error': formData.get('razemp').hasError('required') && (formData.submited || formData.get('razemp').dirty)}">
+              <label for="razemp">Razón social
+                <span class="error-control" *ngIf="formData.get('razemp').hasError('required') && (formData.submited || formData.get('razemp').dirty)">requerida!</span>
+                <span class="error-control" *ngIf="formData.get('razemp').hasError('maxlength') && (formData.submited || formData.get('razemp').dirty)">max 50 carateres!</span>
+                <span>*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="razemp" id="razemp" name="razemp" placeholder="Nombre de la empresa...">
+            </div>
+          </div>
+          <div class="col-md-2">
+            <div class="form-group" [ngClass]="{'has-error': formData.get('telemp').hasError('required') && (formData.submited || formData.get('telemp').dirty)}">
+              <label for="telemp">Telefono
+                  <span class="error-control" *ngIf="formData.get('telemp').hasError('required') && (formData.submited || formData.get('telemp').dirty)">requerido!</span>
+                  <span class="error-control" *ngIf="formData.get('telemp').hasError('maxlength') && (formData.submited || formData.get('telemp').dirty)">max 10 carateres!</span>
+                <span>*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="telemp" id="telemp" name="telemp" placeholder="Telefono...">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="diremp">Dirección
+                <span class="error-control" *ngIf="formData.get('diremp').hasError('required') && (formData.submited || formData.get('diremp').dirty)">requerido!</span>
+                <span class="error-control" *ngIf="formData.get('diremp').hasError('maxlength') && (formData.submited || formData.get('diremp').dirty)">max 25 carateres!</span>
+                <span>*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="diremp" id="diremp" name="diremp" placeholder="Dirección de la empresa...">
+            </div>
+          </div>  
+          <div class="col-md-3">
+            <div class="form-group" [ngClass]="{'has-error': formData.get('coddane').hasError('required') && (formData.submited || formData.get('coddane').dirty)}">
+              <label for="coddane">Ciudad
+                <span class="error-control" *ngIf="formData.get('coddane').hasError('required') && (formData.submited || formData.get('coddane').dirty)">requerida!</span>
+                <span class="error-control" *ngIf="formData.get('coddane').hasError('maxlength') && (formData.submited || formData.get('coddane').dirty)">4 carateres!</span>
+                <span>*</span>
+              </label>
+              <ng-select 
+                [items]="listadoCiudades" 
+                clearable="true" 
+                bindLabel="nommun" 
+                bindValue="coddane" 
+                formControlName="coddane"
+                name="coddane" 
+                placeholder='Seleccione una ciudad'>
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group" [ngClass]="{'has-error': formData.get('geremp').hasError('required') && (formData.submited || formData.get('geremp').dirty)}">
+              <label for="geremp">Gerente
+                  <span class="error-control" *ngIf="formData.get('geremp').hasError('required') && (formData.submited || formData.get('geremp').dirty)">es requerido!</span>
+                  <span class="error-control" *ngIf="formData.get('geremp').hasError('maxlength') && (formData.submited || formData.get('geremp').dirty)">35 carateres!</span>
+                <span>*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="geremp" id="geremp" name="geremp" placeholder="Gerente de la empresa...">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group" [ngClass]="{'has-error': formData.get('conemp').hasError('required') && (formData.submited || formData.get('conemp').dirty)}">
+              <label for="conemp">Contador
+                <span>*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="conemp" id="conemp" name="conemp" placeholder="Contador de la empresa...">
+              <span class="error-control" *ngIf="formData.get('conemp').hasError('required') && (formData.submited || formData.get('conemp').dirty)">es requerido!</span>
+              <span class="error-control" *ngIf="formData.get('conemp').hasError('maxlength') && (formData.submited || formData.get('conemp').dirty)">max 35 carateres!</span>
+            </div>
+          </div>
+          <div class="col-md-3" [ngClass]="{'has-error': formData.get('revemp').hasError('required') && (formData.submited || formData.get('revemp').dirty)}">
+            <div class="form-group">
+              <label for="revemp">Revisor fiscal
+                <span class="error-control" *ngIf="formData.get('revemp').hasError('required') && (formData.submited || formData.get('revemp').dirty)">es requerido!</span>
+                <span class="error-control" *ngIf="formData.get('revemp').hasError('maxlength') && (formData.submited || formData.get('revemp').dirty)">max 35 carateres!</span>
+                <span>*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="revemp" id="revemp" name="revemp" placeholder="Contador de la empresa...">
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group" [ngClass]="{'has-error': formData.get('actemp').hasError('required') && (formData.submited || formData.get('actemp').dirty)}">
+              <label for="actemp">Actividad economica
+                <span class="error-control" *ngIf="formData.get('actemp').hasError('required') && (formData.submited || formData.get('actemp').dirty)">es requerida!</span>
+                <span class="error-control" *ngIf="formData.get('actemp').hasError('maxlength') && (formData.submited || formData.get('actemp').dirty)">max 5 carateres!</span>
+                <span>*</span>
+              </label>
+              <ng-select 
+                [items]="listadoActividades" 
+                clearable="true" 
+                bindLabel="nomact" 
+                bindValue="codact" 
+                formControlName="actemp"
+                name="actemp" 
+                placeholder='Seleccione una actividad'>
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group" [ngClass]="{'has-error': formData.get('tarifa_empresa').hasError('required') && (formData.submited || formData.get('tarifa_empresa').dirty)}">
+              <label for="tarifa_empresa">Tarifa
+                  <span class="error-control" *ngIf="formData.get('tarifa_empresa').hasError('required') && (formData.submited || formData.get('tarifa_empresa').dirty)">es requerido!</span>
+                  <span class="error-control" *ngIf="formData.get('tarifa_empresa').hasError('maxlength') && (formData.submited || formData.get('tarifa_empresa').dirty)">max 3 carateres!</span>
+                <span>*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="tarifa_empresa" id="tarifa_empresa" name="tarifa_empresa" placeholder="Tarifa de la empresa...">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group" [ngClass]="{'has-error': formData.get('tipoemp').hasError('required') && (formData.submited || formData.get('tipoemp').dirty)}">
+              <label for="tipoemp">Regimén tributario
+                  <span class="error-control" *ngIf="formData.get('tipoemp').hasError('required') && (formData.submited || formData.get('tipoemp').dirty)">requerido!</span>
+                  <span class="error-control" *ngIf="formData.get('tipoemp').hasError('maxlength') && (formData.submited || formData.get('tipoemp').dirty)">1 carateres!</span>
+                <span>*</span>
+              </label>
+              <ng-select 
+                [items]="listadoRegimenes" 
+                clearable="true" 
+                bindLabel="nomreg" 
+                bindValue="codreg" 
+                formControlName="tipoemp" 
+                name="tipoemp" 
+                placeholder='Seleccione un regimen'
+                (change)="changeRegimen($event)">
+              </ng-select>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group" [ngClass]="{'has-error': formData.get('tarifa_cree').hasError('required') && (formData.submited || formData.get('tarifa_cree').dirty)}">
+              <label for="tarifa_cree">Tarifa CREE
+                  <span class="error-control" *ngIf="formData.get('tarifa_cree').hasError('required') && (formData.submited || formData.get('tarifa_cree').dirty)"> es requerida!</span>
+                  <span class="error-control" *ngIf="formData.get('tarifa_cree').hasError('maxlength') && (formData.submited || formData.get('tarifa_cree').dirty)">3 carateres!</span>
+                <span>*</span>
+              </label>
+              <input type="text" class="form-control" formControlName="tarifa_cree" id="tarifa_cree" name="tarifa_cree" placeholder="Tarifa...">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="col-lg-2">
+        <div class="form-group">
+          <img [tooltipAnimation]="true" style="position: absolute; width:190px; height: 200px" (click)="openLoadFile()" tooltip="Logo de la empresa" tooltipPlacement="bottom" src="assets/dist/img/no_img.png" alt="img_empresa">
+          <input type="file" style="display: none" name="logo_empresa" id="logo_empresa" formControlName="logo_empresa">
+          <span class="error-control" *ngIf="formData.get('logo_empresa').hasError('required') && (formData.submited || formData.get('logo_empresa').dirty)">El logo es requerido!</span>
+        </div>
+      </section>
+    </div>
+    <div class="row">
+      <div style="margin-top:20px !important; margin-left: 15px">
+        <span>
+          <button type="submit" class="btn btn-primary btn-lg" [disabled]="!empresaForm.valid"
+            *ngIf="accionForm==1">Guardar Datos</button>
+        </span>
+        <span>
+          <button type="submit" class="btn btn-primary btn-lg" [disabled]="!empresaForm.valid"
+            *ngIf="accionForm==2">Actualizar Datos</button>
+        </span>
+      </div>
+    </div>
+  </form>

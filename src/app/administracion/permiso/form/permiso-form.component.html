@@ -1,0 +1,71 @@
+<ngx-smart-modal #permiso_form_modal identifier="permiso_form_modal" [closable]="false" [escapable]="false"
+  [dismissable]="false" customClass="nsm-dialog-animation-fade modal-smart-60 modal-smart-60-top-50">
+  <form [formGroup]="formData" (ngSubmit)="!formData.valid || submitformData(formData)">
+    <div class="modal-header">
+      <h4 class="modal-title">Formulario Permisos</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+
+        <div class="col-lg-4">
+          <div class="form-group"
+            [ngClass]="{'has-error': (formData.get('codigo').hasError('required') || formData.get('codigo').hasError('maxlength')) && (formData.submited || formData.get('codigo').dirty) }">
+            <label for="codigo">Codigo
+                <span class="error-control" *ngIf="formData.get('codigo').hasError('required') && (formData.submited || formData.get('codigo').dirty)">requerido!</span>
+                <span class="error-control" *ngIf="formData.get('codigo').hasError('maxlength') && (formData.submited || formData.get('codigo').dirty)">max 20 carateres!</span>
+              <span>*</span>
+            </label>
+            <input type="text" class="form-control codigo" formControlName="codigo" [disabled]="true" id="codigo" name="codigo" placeholder="Codigo">
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="form-group" [ngClass]="{'has-error': (formData.get('nombre').hasError('required') || formData.get('nombre').hasError('maxlength')) && (formData.submited || formData.get('nombre').dirty) }">
+            <label for="nombre">Nombre
+              <span class="error-control" *ngIf="formData.get('nombre').hasError('required') && (formData.submited || formData.get('nombre').dirty)">requerido!</span>
+              <span class="error-control" *ngIf="formData.get('nombre').hasError('maxlength') && (formData.submited || formData.get('nombre').dirty)">max 40 carateres!</span>
+              <span>*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="nombre" id="nombre" name="nombre" autocomplete="off" placeholder="Nombre del permiso...">
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="form-group" [ngClass]="{'has-error': (formData.get('tipo').hasError('required') || formData.get('tipo').hasError('maxlength')) && (formData.submited || formData.get('tipo').dirty) }">
+            <label for="tipo">Tipo
+                <span class="error-control" *ngIf="formData.get('tipo').hasError('required') && (formData.submited || formData.get('tipo').dirty)">requerido!</span>
+                <span class="error-control" *ngIf="formData.get('tipo').hasError('maxlength') && (formData.submited || formData.get('tipo').dirty)">max 1 carateres!</span>
+              <span>*</span>
+            </label>
+            <select class="form-control"  name="tipo" id="tipo" formControlName="tipo" (change)="changeTipo($event)">
+              <option [value]="">Seleccionar...</option>
+              <option [value]="M">Menu</option>
+              <option [value]="R">Ruta</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="form-group" [ngClass]="{'has-error': (formData.get('descripcion').hasError('required') || formData.get('descripcion').hasError('maxlength')) && (formData.submited || formData.get('descripcion').dirty) }">
+            <label>Descripción
+                <span class="error-control" *ngIf="formData.get('descripcion').hasError('required') && (formData.submited || formData.get('descripcion').dirty)">requerida!</span>
+                <span class="error-control" *ngIf="formData.get('descripcion').hasError('maxlength') && (formData.submited || formData.get('descripcion').dirty)">max 100 carateres!</span>
+              <span>*</span>
+            </label>
+            <textarea type="text" class="form-control" rows="8" id="descripcion" name="descripcion" placeholder="Digite una descripción para este permiso..." formControlName="descripcion"></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-left" (click)="cerrar(); formData.reset()">
+        <i class="fa fa-times-circle"></i> Cancelar</button>
+      <button type="submit" class="btn btn-success pull-right" [disabled]="!formData.valid" *ngIf="c_accion==1">
+        <i class="fa fa-save"></i> Guardar Permiso</button>
+      <button type="submit" class="btn btn-primary pull-right" [disabled]="!formData.valid" *ngIf="c_accion==2">
+        <i class=" fa-save"></i>Actualizar Permiso</button>
+    </div>
+  </form>
+</ngx-smart-modal>

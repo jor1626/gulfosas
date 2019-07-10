@@ -1,0 +1,45 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~ngx-smart-modal/ngx-smart-modal";
+@import "~@ng-select/ng-select/themes/default.theme.css";
+
+
+label {
+    font-weight: normal !important;
+}
+
+label > span {
+    color: red !important;
+}
+
+.codigo {
+    font-weight: bold; 
+    color: red; 
+    text-align: center
+}
+
+.error-control {
+    color: #e65251;
+    font-size: 10pt;    
+}
+
+.modal-smart-50 {
+    top: 15%;
+    max-width: 50%; 
+    border-radius: 10px; 
+}
+
+.modal-smart-60 {
+    top: 15%;
+    max-width: 60%; 
+    border-radius: 10px; 
+}
+
+.modal-smart-60-top-50{
+    top: 10% !important;
+}
+
+.modal-smart-70 {
+    top: 15%;
+    max-width: 70%; 
+    border-radius: 10px; 
+}

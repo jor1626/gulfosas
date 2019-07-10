@@ -1,0 +1,37 @@
+<table style="zoom: 0.90" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" datatable class="table table-bordered table-condensed table-striped compact no-footer">  <thead>
+    <tr>
+      <th>Codigo</th>
+      <th width="250">Nombre</th>
+      <th width="150">Tipo</th>
+      <th>Descripción</th>
+      <th width="90">Estado</th>
+      <th width="90"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of permisos">
+      <td style="color:red;font-weight:bold;text-align:center">{{item.codigo}}</td>
+      <td class="destacarcampo">{{item.nombre}}</td>
+      <td>{{item.tipo}}</td>
+      <td>{{item.descripcion}}</td>
+      <td style="text-align:center">
+        <span *ngIf="item.estado == 1" class="label label-success">Activo</span>
+        <span *ngIf="item.estado == 0" class="label label-danger">Inactivo</span>
+      </td>
+      <td style="text-align:center">
+        <button type="button" *ngIf="item.estado == 1" class="btn btn-primary btn-xs" tooltip="Editar" (click)="editar(item.id)"
+          [tooltipAnimation]="true" tooltipPlacement="left">
+          <i class="far fa-edit"></i>
+        </button>
+        <button type="button" *ngIf="item.estado == 1" class="btn btn-danger btn-xs" tooltip="Desactivar" (click)="desactivar(item.id)"
+          [tooltipAnimation]="true" tooltipPlacement="left">
+          <i class="fas fa-power-off"></i>
+        </button>
+        <button type="button" *ngIf="item.estado == 0" class="btn btn-default btn-xs" tooltip="Activar" (click)="reactivar(item.id)"
+          [tooltipAnimation]="true" tooltipPlacement="left">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

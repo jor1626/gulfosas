@@ -1,0 +1,51 @@
+<table style="zoom: 0.90" [dtOptions]="dtOptions" [dtTrigger]="dtTrigger"
+  datatable class="table table-bordered table-condensed table-striped compact no-footer">
+  <thead>
+    <tr>
+      <th width="100">Codigo</th>
+      <th width="250">Nombre</th>
+      <th width="200">Dirección</th>
+      <th>Clase</th>
+      <th width="200">Regimen tributario</th>
+      <th width="100">Estado</th>
+      <th width="90"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of sucursales">
+      <td class="codigotabla1">{{ item.codcen }}</td>
+      <td class="destacarcampo">{{ item.nomcen }}</td>
+      <td class="destacarcampo">{{ item.dircen }}</td>
+      <td class="destacarcampo">
+        <span *ngIf="item.nivcen==1">Administrador</span>
+        <span *ngIf="item.nivcen==2">Obras</span>
+        <span *ngIf="item.nivcen==3">Equipos</span>
+      </td>
+      <td class="destacarcampo">
+        <span *ngIf="item.concen==1">Gran Contribuyente</span>
+        <span *ngIf="item.concen==2">Regimen Común</span>
+        <span *ngIf="item.concen==3">Regimen Especial</span>
+        <span *ngIf="item.concen==4">Regimen Simplificado</span>
+        <span *ngIf="item.concen==5">Persona natural</span>
+      </td>
+      <td class="estadoYbtn">
+        <span class="label label-success" *ngIf="item.activo == 1">Activo</span>
+        <span class="label label-danger" *ngIf="item.activo== 0">Inactivo</span>
+      </td>
+      <td class="estadoYbtn">
+        <button type="button" *ngIf=" item.activo == 1" class="btn btn-primary btn-xs" tooltip="Editar"
+          (click)="editarSucursal(item)" [tooltipAnimation]="true" tooltipPlacement="left">
+          <i class="far fa-edit"></i>
+        </button>
+        <button type="button" *ngIf=" item.activo == 1" class="btn btn-danger btn-xs" tooltip="Desactivar"
+          (click)="desactivarSucursal(item)" [tooltipAnimation]="true" tooltipPlacement="left">
+          <i class="fas fa-power-off"></i>
+        </button>
+        <button type="button" *ngIf=" item.activo == 0" class="btn btn-default btn-xs" tooltip="Activar"
+          (click)="activarSucursal(item)" [tooltipAnimation]="true" tooltipPlacement="left">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

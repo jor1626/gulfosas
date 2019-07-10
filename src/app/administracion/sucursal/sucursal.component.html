@@ -1,0 +1,54 @@
+<section class="content-header">
+  <h1>
+    Sucursales
+    <small>Version 2.0</small>
+  </h1>
+  <ol class="breadcrumb">
+    <li>
+      <a>
+        <i class="fa fa-home"></i> Administración</a>
+    </li>
+    <li class="active">Sucursales</li>
+  </ol>
+</section>
+
+<section class="content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title " style="margin-top: 10px !important">Listado de Sucursales</h3>
+          <div class="pull-right" style="margin-top: 10px; margin-right: 80px;">
+            <select name="changeState" id="changeState" style="width: 100px;" [(value)]="c_filter" (change)="changeState($event)">
+              <option *ngFor="let item of c_filter_table" [value]="item.codigo">{{item.nombre}}</option>
+            </select>
+          </div>
+
+          <div class="box-tools pull-right" style="margin-top: 10px !important">
+            <button type="button" class="btn btn-box-tool" (click)="recargarTabla()">
+              <i class="fa fa-refresh"></i>
+            </button>
+            <div class="btn-group">
+              <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                <i class="fa fa-chevron-down"></i>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <a (click)="nuevo()"> Nuevo Sucursal</a>
+                </li>
+              </ul>
+            </div>
+            <button type="button" class="btn btn-box-tool" data-widget="collapse">
+              <i class="fa fa-minus"></i>
+            </button>
+          </div>
+        </div>
+        <div class="box-body">
+          <app-sucursal-table [filtro]="estadoFilt" [cambio]="c_cambio_table" (close)="event_table_sucursales($event)"></app-sucursal-table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-sucursal-form [accion]="c_accion_form" [idIn]="c_id_table" (close)="event_form_sucursales($event)"></app-sucursal-form>

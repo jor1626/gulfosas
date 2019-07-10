@@ -1,0 +1,94 @@
+<ngx-smart-modal #sucursal_form_modal identifier="sucursal_form_modal" [closable]="false" [escapable]="false"
+  [dismissable]="false" customClass="nsm-dialog-animation-fade modal-smart-60">
+  <form [formGroup]="formData" (ngSubmit)="!formData.valid || submitSucursalForm(formData)">
+    <div class="modal-header">
+      <h4 class="modal-title">Formulario Sucursales</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+
+        <div class="col-lg-4">
+          <div class="form-group" [ngClass]="{'has-error': (formData.get('codcen').hasError('required') || formData.get('codcen').hasError('maxlength')) && (formData.submited || formData.get('codcen').dirty) }">
+            <label for="codcen">Codigo
+              <span class="error-control" *ngIf="formData.get('codcen').hasError('required') && (formData.submited || formData.get('codcen').dirty)">requerido!</span>
+              <span class="error-control" *ngIf="formData.get('codcen').hasError('maxlength') && (formData.submited || formData.get('codcen').dirty)">3 carateres!</span>
+              <span>*</span>
+            </label>
+            <input type="text" class="form-control codigo" formControlName="codcen" [disabled]="true" id="codcen" name="codcen" placeholder="Codigo">
+          </div>
+        </div>
+
+        <div class="col-lg-8">
+          <div class="form-group has-feedback" [ngClass]="{'has-error': formData.get('nomcen').hasError('required') && (formData.submited || formData.get('nomcen').dirty)}">
+            <label for="nomcen">Nombre
+              <span class="error-control" *ngIf="formData.get('nomcen').hasError('required') && (formData.submited || formData.get('nomcen').dirty)">requerido!</span>
+              <span class="error-control" *ngIf="formData.get('nomcen').hasError('maxlength') && (formData.submited || formData.get('nomcen').dirty)">40 carateres!</span>
+              <span>*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="nomcen" id="nomcen" name="nomcen" placeholder="Nombre de la sucursal...">
+            <span class="fa fa-home form-control-feedback"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-lg-4">
+          <div class="form-group" [ngClass]="{'has-error': (formData.get('dircen').hasError('required') || formData.get('dircen').hasError('maxlength')) && (formData.submited || formData.get('dircen').dirty) }">
+            <label for="dircen">Dirección
+              <span class="error-control" *ngIf="formData.get('dircen').hasError('required') && (formData.submited || formData.get('dircen').dirty)">requerida!</span>
+              <span class="error-control" *ngIf="formData.get('dircen').hasError('maxlength') && (formData.submited || formData.get('dircen').dirty)">20 carateres!</span>
+              <span>*</span>
+            </label>
+            <input type="text" class="form-control" id="dircen" name="dircen" formControlName="dircen" placeholder="Dirección..." >
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="form-group" [ngClass]="{'has-error': formData.get('concen').hasError('required') && (formData.submited || formData.get('concen').dirty)}">
+            <label for="concen">Regimén tributario
+                <span class="error-control" *ngIf="formData.get('concen').hasError('required') && (formData.submited || formData.get('concen').dirty)">requerido!</span>
+                <span class="error-control" *ngIf="formData.get('concen').hasError('maxlength') && (formData.submited || formData.get('concen').dirty)">5 carateres!</span>
+              <span>*</span>
+            </label>
+            <ng-select 
+              [items]="listadoRegimenes" 
+              clearable="true" 
+              bindLabel="nomreg" 
+              bindValue="codreg" 
+              formControlName="concen" 
+              name="concen" 
+              placeholder='Seleccione un regimen'
+              (change)="changeRegimen($event)">
+            </ng-select>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="form-group" [ngClass]="{'has-error': formData.get('nivcen').hasError('required') && (formData.submited || formData.get('nivcen').dirty)}">
+            <label>Clase
+                <span class="error-control" *ngIf="formData.get('nivcen').hasError('required') && (formData.submited || formData.get('nivcen').dirty)">requerido!</span>
+                <span class="error-control" *ngIf="formData.get('nivcen').hasError('maxlength') && (formData.submited || formData.get('nivcen').dirty)">1 carateres!</span>
+              <span>*</span>
+            </label>
+            <select class="form-control" (change)="changeClase($event)" id="nivcen" name="nivcen" formControlName="nivcen" aria-placeholder="Selecionar clase...">
+              <option [value]="1">Administracion</option>
+              <option [value]="2">Obras</option>
+              <option [value]="3">Equipos</option>
+            </select>
+          </div>
+        </div>
+
+      </div>
+    
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-left" (click)="cerrar(); formData.reset()">
+        <i class="fa fa-times-circle"></i> Cancelar</button>
+      <button type="submit" class="btn btn-success pull-right" [disabled]="!this.formData.valid" *ngIf="c_accion==1">
+        <i class="fa fa-save"></i> Guardar Sucursal</button>
+      <button type="submit" class="btn btn-primary pull-right" [disabled]="!this.formData.valid" *ngIf="c_accion==2">
+        <i class=" fa-save"></i>Actualizar Sucursal</button>
+    </div>
+  </form>
+</ngx-smart-modal>

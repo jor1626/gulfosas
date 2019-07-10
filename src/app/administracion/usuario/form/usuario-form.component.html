@@ -1,0 +1,102 @@
+<ngx-smart-modal #usuario_form_modal identifier="usuario_form_modal" [closable]="false" [escapable]="false"
+  [dismissable]="false" customClass="nsm-dialog-animation-fade modal-smart-60">
+  <form [formGroup]="formData" (ngSubmit)="!formData.valid || submitUsuarioForm(formData)">
+    <div class="modal-header">
+      <h4 class="modal-title">Formulario Usuarios</h4>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+
+        <div class="col-lg-3">
+          <div class="form-group"
+            [ngClass]="{'has-error': (formData.get('documento').hasError('required') || formData.get('documento').hasError('maxlength')) && (formData.submited || formData.get('documento').dirty) }">
+            <label for="documento">Codigo
+              <span class="error-control" *ngIf="formData.get('documento').hasError('required') && (formData.submited || formData.get('documento').dirty)">requerido!</span>
+              <span class="error-control" *ngIf="formData.get('documento').hasError('maxlength') && (formData.submited || formData.get('documento').dirty)">max 10 carateres!</span>
+              <span>*</span>
+            </label>
+            <input type="text" class="form-control codigo" formControlName="documento" id="documento" name="documento" placeholder="Documento">
+          </div>
+        </div>
+
+        <div class="col-lg-6">
+          <div class="form-group" [ngClass]="{'has-error': (formData.get('primer_nombre').hasError('required') || formData.get('primer_nombre').hasError('maxlength')) && (formData.submited || formData.get('primer_nombre').dirty) }">
+            <label for="primer_nombre">Nombre
+              <span class="error-control" *ngIf="formData.get('primer_nombre').hasError('required') && (formData.submited || formData.get('primer_nombre').dirty)">requerido!</span>
+              <span class="error-control" *ngIf="formData.get('primer_nombre').hasError('maxlength') && (formData.submited || formData.get('primer_nombre').dirty)">maximo 40 carateres!</span>
+              <span>*</span>
+            </label>
+            <div class="input-group">
+              <input type="text" class="form-control" id="primer_nombre" name="primer_nombre" formControlName="primer_nombre" autocomplete="off" placeholder="Pri no..." aria-describedby="sizing-addon3">
+              <span class="input-group-addon" id="sizing-addon3"><i class="fa fa-home"></i></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-3">
+          <div class="form-group" [ngClass]="{'has-error': (formData.get('telalm').hasError('required') || formData.get('telalm').hasError('maxlength')) && (formData.submited || formData.get('telalm').dirty) }">
+            <label for="telalm">Telefono
+                <span class="error-control" *ngIf="formData.get('telalm').hasError('required') && (formData.submited || formData.get('telalm').dirty)">requerido!</span>
+                <span class="error-control" *ngIf="formData.get('telalm').hasError('maxlength') && (formData.submited || formData.get('telalm').dirty)">maximo 10 carateres!</span>
+              <span>*</span>
+            </label>
+            <input type="number" class="form-control" id="telalm" name="telalm" formControlName="telalm" placeholder="Telefono..." >
+          </div>
+        </div>
+
+      </div>
+      <div class="row">
+
+        <div class="col-lg-3">
+          <div class="form-group" [ngClass]="{'has-error': (formData.get('prefijo').hasError('required') || formData.get('prefijo').hasError('maxlength')) && (formData.submited || formData.get('prefijo').dirty) }">
+            <label>Prefijo
+              <span class="error-control" *ngIf="formData.get('prefijo').hasError('required') && (formData.submited || formData.get('prefijo').dirty)">requerido!</span>
+              <span class="error-control" *ngIf="formData.get('prefijo').hasError('maxlength') && (formData.submited || formData.get('prefijo').dirty)">max 2 carateres!</span>
+              <span>*</span>
+            </label>
+            <input type="text" class="form-control" id="prefijo" name="prefijo" placeholder="Prefijo..." formControlName="prefijo">
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="form-group" [ngClass]="{'has-error': (formData.get('diralm').hasError('required') || formData.get('diralm').hasError('maxlength')) && (formData.submited || formData.get('diralm').dirty) }">
+            <label>Direccion
+                <span class="error-control" *ngIf="formData.get('diralm').hasError('required') && (formData.submited || formData.get('diralm').dirty)">requerida!</span>
+                <span class="error-control" *ngIf="formData.get('diralm').hasError('maxlength') && (formData.submited || formData.get('diralm').dirty)">maximo 20 carateres!</span>
+              <span>*</span>
+            </label>
+            <input type="text" class="form-control" id="diralm" name="diralm" placeholder="Dirección..." formControlName="diralm">
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="form-group" [ngClass]="{'has-error': (formData.get('coddane').hasError('required') || formData.get('coddane').hasError('maxlength')) && (formData.submited || formData.get('coddane').dirty) }">
+            <label>Ciudad
+              <span class="error-control" *ngIf="formData.get('coddane').hasError('required') && (formData.submited || formData.get('coddane').dirty)">requerida!</span>
+              <span class="error-control" *ngIf="formData.get('coddane').hasError('maxlength') && (formData.submited || formData.get('coddane').dirty)">maximo 4 carateres!</span>
+              <span>*</span>
+            </label>
+            <ng-select 
+              [items]="listadoCiudades" 
+              clearable="true" 
+              bindLabel="nommun" 
+              bindValue="coddane" 
+              (change)="changeCiudad($event)" 
+              formControlName="coddane"
+              name="coddane" 
+              placeholder='Seleccione una ciudad'>
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-default pull-left" (click)="cerrar(); formData.reset()">
+        <i class="fa fa-times-circle"></i> Cancelar</button>
+      <button type="submit" class="btn btn-success pull-right" [disabled]="!this.formData.valid" *ngIf="c_accion==1">
+        <i class="fa fa-save"></i> Guardar Usuario</button>
+      <button type="submit" class="btn btn-primary pull-right" [disabled]="!this.formData.valid" *ngIf="c_accion==2">
+        <i class=" fa-save"></i>Actualizar Usuario</button>
+    </div>
+  </form>
+</ngx-smart-modal>

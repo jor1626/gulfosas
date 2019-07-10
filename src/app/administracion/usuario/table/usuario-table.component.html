@@ -1,0 +1,42 @@
+<table [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" style="zoom:0.80" datatable class="table table-bordered table-condensed table-striped compact no-footer">
+  <thead>
+    <tr>
+      <th>Documento</th>
+      <th>Nombre Completo</th>
+      <th>Correo Electronico</th>
+      <th>Telefono</th>
+      <th>Perfil</th>
+      <th>Usuario</th>
+      <th width="100">Estado</th>
+      <th width="90"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of usuarios">
+      <td>{{item.documento}}</td>
+      <td>{{item.primer_nombre}} {{item.segundo_nombre}} {{item.primer_apellido}} {{item.segundo_apellido}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.telefono}}</td>
+      <td>{{item.telefono}}</td>
+      <td>{{item.usuario}}</td>
+      <td>
+        <span *ngIf="item.estado == 1" class="label label-success">Activo</span>
+        <span *ngIf="item.estado == 0" class="label label-danger">Inactivo</span>
+      </td>
+      <td style="text-align:center">
+        <button type="button" *ngIf="item.estado == 1" class="btn btn-primary btn-xs" tooltip="Editar" (click)="editar(item.id)"
+          [tooltipAnimation]="true" tooltipPlacement="left">
+          <i class="far fa-edit"></i>
+        </button>
+        <button type="button" *ngIf="item.estado == 1" class="btn btn-danger btn-xs" tooltip="Desactivar" (click)="desactivar(item.id)"
+          [tooltipAnimation]="true" tooltipPlacement="left">
+          <i class="fas fa-power-off"></i>
+        </button>
+        <button type="button" *ngIf="item.estado == 0" class="btn btn-default btn-xs" tooltip="Activar" (click)="reactivar(item.id)"
+          [tooltipAnimation]="true" tooltipPlacement="left">
+          <i class="fas fa-sync-alt"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
