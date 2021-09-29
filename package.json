@@ -22,7 +22,7 @@
     "@ng-select/ng-select": "^2.20.0",
     "angular-datatables": "^5.1.0",
     "core-js": "^2.5.4",
-    "datatables.net": "^1.10.19",
+    "datatables.net": "^1.11.3",
     "datatables.net-dt": "^1.10.19",
     "jquery": "^3.4.1",
     "ng-snotify": "^4.3.1",
